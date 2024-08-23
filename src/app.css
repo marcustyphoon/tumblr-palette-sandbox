@@ -1,0 +1,31 @@
+body {
+  --a: rgb(138, 138, 138);
+  --b: rgb(128, 128, 128);
+  background: conic-gradient(
+    var(--a) 90deg,
+    var(--b) 90deg 180deg,
+    var(--a) 180deg 270deg,
+    var(--b) 270deg
+  );
+  background-repeat: repeat;
+  background-size: 60px 60px;
+  background-position: top left;
+}
+
+#root {
+  width: 100%;
+  padding: 1.5em;
+  box-sizing: border-box;
+  font-size: 1.6em;
+}
+
+.row {
+  display: flex;
+}
+
+.swatch {
+  color: black;
+  padding: 0.5em 0;
+  width: 320px;
+  text-align: center;
+}
