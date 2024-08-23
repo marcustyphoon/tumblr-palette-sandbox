@@ -1,0 +1,42 @@
+{
+  "name": "marcus-vite-starter",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "packageManager": "pnpm@8.15.7+sha256.50783dd0fa303852de2dd1557cd4b9f07cb5b018154a6e76d0f40635d6cee019",
+  "engines": {
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "eslintCheck": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "typeCheck": "tsc --noEmit",
+    "prettierCheck": "prettier --check . \"!**/*.{md,json,yaml,yml}\"",
+    "test": "concurrently -g -c auto pnpm:eslintCheck pnpm:typeCheck pnpm:prettierCheck"
+  },
+  "dependencies": {
+    "colorjs.io": "^0.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-error-boundary": "^4.0.13"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.2.0",
+    "@typescript-eslint/parser": "^8.2.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.11",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.2"
+  }
+}
