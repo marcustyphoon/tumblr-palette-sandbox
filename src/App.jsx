@@ -164,53 +164,56 @@ const [designTokensDecision, paletteDecision] = generate(sourceDecision2016, 'de
 
 function App() {
   return (
-    <div className="container">
-      {Object.keys(realTrueBlueTokens).map((key) => {
-        return (
-          <div key={key} className="row">
-            <div className="swatch" style={{ backgroundColor: realTrueBlueTokens[key] }}>
-              {key}
+    <>
+      <div className="background" />
+      <div className="container">
+        {Object.keys(realTrueBlueTokens).map((key) => {
+          return (
+            <div key={key} className="row">
+              <div className="swatch" style={{ backgroundColor: realTrueBlueTokens[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: designTokensTrueBlue[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: designTokens2016[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: designTokens2013[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: designTokensDecision[key] }}>
+                {key}
+              </div>
             </div>
-            <div className="swatch" style={{ backgroundColor: designTokensTrueBlue[key] }}>
-              {key}
-            </div>
-            <div className="swatch" style={{ backgroundColor: designTokens2016[key] }}>
-              {key}
-            </div>
-            <div className="swatch" style={{ backgroundColor: designTokens2013[key] }}>
-              {key}
-            </div>
-            <div className="swatch" style={{ backgroundColor: designTokensDecision[key] }}>
-              {key}
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
 
-      <hr style={{ margin: '3em' }} />
+        <hr style={{ margin: '3em' }} />
 
-      {Object.keys(paletteTrueBlue).map((key) => {
-        return (
-          <div key={key} className="row">
-            <div className="swatch" style={{ backgroundColor: realTrueBluePalette[key] }}>
-              {key}
+        {Object.keys(paletteTrueBlue).map((key) => {
+          return (
+            <div key={key} className="row">
+              <div className="swatch" style={{ backgroundColor: realTrueBluePalette[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: paletteTrueBlue[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: palette2016[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: palette2013[key] }}>
+                {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: paletteDecision[key] }}>
+                {key}
+              </div>
             </div>
-            <div className="swatch" style={{ backgroundColor: paletteTrueBlue[key] }}>
-              {key}
-            </div>
-            <div className="swatch" style={{ backgroundColor: palette2016[key] }}>
-              {key}
-            </div>
-            <div className="swatch" style={{ backgroundColor: palette2013[key] }}>
-              {key}
-            </div>
-            <div className="swatch" style={{ backgroundColor: paletteDecision[key] }}>
-              {key}
-            </div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

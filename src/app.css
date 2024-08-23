@@ -1,4 +1,9 @@
-body {
+.background {
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+
   --a: rgb(138, 138, 138);
   --b: rgb(128, 128, 128);
   background: conic-gradient(
@@ -14,9 +19,12 @@ body {
 
 #root {
   width: 100%;
-  padding: 1.5em;
   box-sizing: border-box;
   font-size: 1.6em;
+}
+
+.container {
+  padding: 1.5em;
 }
 
 .row {
