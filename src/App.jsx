@@ -239,30 +239,65 @@ const [designTokens2016Native, palette2016Native] = generateNative(source2016, '
 const [designTokens2013, palette2013] = generate(source2013, '2013');
 const [designTokensDecision, paletteDecision] = generate(sourceDecision2016, 'decision');
 
+const toStyleKeys = (source) =>
+  Object.entries(source)
+    .map(([key, value]) => `--${key}: ${value}; `)
+    .join('\n');
+
 function App() {
   return (
     <>
       <div className="background" />
       <div className="container">
+        <style>{`
+          .paletteTrueBlue {
+            ${toStyleKeys(sourceTrueBlue)}
+            ${toStyleKeys(designTokensTrueBlue)}
+            ${toStyleKeys(paletteTrueBlue)}
+          }
+          .palette2016native {
+            ${toStyleKeys(source2016)}
+            ${toStyleKeys(designTokens2016Native)}
+            ${toStyleKeys(palette2016Native)}
+          }
+          .palette2016 {
+            ${toStyleKeys(source2016)}
+            ${toStyleKeys(designTokens2016)}
+            ${toStyleKeys(palette2016)}
+          }
+          .palette2013 {
+            ${toStyleKeys(source2013)}
+            ${toStyleKeys(designTokens2013)}
+            ${toStyleKeys(palette2013)}
+          }
+          .paletteDecision {
+            ${toStyleKeys(sourceDecision2016)}
+            ${toStyleKeys(designTokensDecision)}
+            ${toStyleKeys(paletteDecision)}
+          }
+        `}</style>
         {Object.keys(realTrueBlueTokens).map((key) => {
           return (
             <div key={key} className="row">
               <div className="swatch" style={{ backgroundColor: realTrueBlueTokens[key] }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: designTokensTrueBlue[key] }}>
+              <div className="swatch paletteTrueBlue" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: designTokens2016Native[key] }}>
+              <div
+                className="swatch palette2016native"
+                style={{ backgroundColor: `var(--${key})` }}
+              >
                 {key} (n)
               </div>
-              <div className="swatch" style={{ backgroundColor: designTokens2016[key] }}>
+              <div className="swatch palette2016" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: designTokens2013[key] }}>
+              <div className="swatch palette2013" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: designTokensDecision[key] }}>
+              <div className="swatch paletteDecision" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
             </div>
@@ -277,19 +312,22 @@ function App() {
               <div className="swatch" style={{ backgroundColor: realTrueBluePalette[key] }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: paletteTrueBlue[key] }}>
+              <div className="swatch paletteTrueBlue" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: palette2016Native[key] }}>
+              <div
+                className="swatch palette2016native"
+                style={{ backgroundColor: `var(--${key})` }}
+              >
                 {key} (n)
               </div>
-              <div className="swatch" style={{ backgroundColor: palette2016[key] }}>
+              <div className="swatch palette2016" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: palette2013[key] }}>
+              <div className="swatch palette2013" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: paletteDecision[key] }}>
+              <div className="swatch paletteDecision" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
             </div>
