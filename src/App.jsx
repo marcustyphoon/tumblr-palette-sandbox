@@ -160,8 +160,82 @@ const generate = (source, name) => {
   return [designTokens, palette];
 };
 
+const generateNative = (source, name) => {
+  const designTokensMut = {};
+
+  [
+    'Navy',
+    'Blue',
+    'Purple',
+    'Pink',
+    'Red',
+    'Orange',
+    'Yellow',
+    'Green',
+    'Black',
+    'White',
+    'Gray',
+  ].forEach(async (colorName) => {
+    const key = `color${colorName}`;
+    const color = `rgba(${source[colorName.toLowerCase()]}, 1)`;
+
+    designTokensMut[key] = color;
+
+    [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
+      if (colorName === 'Navy') {
+        const result = `color-mix(in srgb, ${color}, white ${100 - num}%)`;
+        designTokensMut[`${key}${num}`] = result;
+      } else {
+        const result =
+          num > 50
+            ? `color-mix(in srgb, ${color}, black ${num * 2 - 100}%)`
+            : `color-mix(in srgb, ${color}, white ${100 - num * 2}%)`;
+        designTokensMut[`${key}${num}`] = result;
+      }
+    });
+
+    [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
+      const result = `rgba(${source[colorName.toLowerCase()]}, ${num / 100})`;
+      designTokensMut[`${key}Tint${num}`] = result;
+    });
+  });
+
+  designTokensMut.colorTransparent = 'rgba(255, 255, 255, 0)';
+
+  // [
+  //   'Blue',
+  //   'Green',
+  //   ['Green', 'Yellow'],
+  //   'Yellow',
+  //   'Orange',
+  //   ['Orange', 'Red'],
+  //   'Red',
+  //   ['Red', 'Pink'],
+  //   'Pink',
+  //   ['Pink', 'Purple'],
+  //   'Purple',
+  // ].forEach(async (color, i) => {
+  //   if (Array.isArray(color)) {
+  //     designTokensMut[`colorRainbow${i}`] = `color-mix(in srgb, ${color[0]}, ${color[1]})`;
+  //   } else {
+  //     designTokensMut[`colorRainbow${i}`] = `rgba(${source[color.toLowerCase()]}, 1)`;
+  //   }
+  // });
+
+  const designTokens = Object.fromEntries(
+    Object.keys(realTrueBlueTokens).map((key) => [key, designTokensMut[key] ?? null]),
+  );
+  console.log(`${name} designTokens`, JSON.stringify(designTokens, null, 2));
+
+  const palette = trueBlueTokensToPalette(designTokens);
+  console.log(`${name} palette`, JSON.stringify(palette, null, 2));
+
+  return [designTokens, palette];
+};
+
 const [designTokensTrueBlue, paletteTrueBlue] = generate(sourceTrueBlue, 'trueblue');
 const [designTokens2016, palette2016] = generate(source2016, '2016');
+const [designTokens2016Native, palette2016Native] = generateNative(source2016, '2016 native');
 const [designTokens2013, palette2013] = generate(source2013, '2013');
 const [designTokensDecision, paletteDecision] = generate(sourceDecision2016, 'decision');
 
@@ -178,6 +252,9 @@ function App() {
               </div>
               <div className="swatch" style={{ backgroundColor: designTokensTrueBlue[key] }}>
                 {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: designTokens2016Native[key] }}>
+                {key} (n)
               </div>
               <div className="swatch" style={{ backgroundColor: designTokens2016[key] }}>
                 {key}
@@ -202,6 +279,9 @@ function App() {
               </div>
               <div className="swatch" style={{ backgroundColor: paletteTrueBlue[key] }}>
                 {key}
+              </div>
+              <div className="swatch" style={{ backgroundColor: palette2016Native[key] }}>
+                {key} (n)
               </div>
               <div className="swatch" style={{ backgroundColor: palette2016[key] }}>
                 {key}
