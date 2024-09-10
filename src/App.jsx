@@ -160,7 +160,7 @@ const generate = (source, name) => {
   return [designTokens, palette];
 };
 
-const generateNative = (source, name) => {
+const generateNative = (name) => {
   const designTokensMut = {};
 
   [
@@ -177,7 +177,7 @@ const generateNative = (source, name) => {
     'Gray',
   ].forEach(async (colorName) => {
     const key = `color${colorName}`;
-    const color = `rgba(${source[colorName.toLowerCase()]}, 1)`;
+    const color = `rgba(var(--${colorName.toLowerCase()}), 1)`;
 
     designTokensMut[key] = color;
 
@@ -195,7 +195,7 @@ const generateNative = (source, name) => {
     });
 
     [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
-      const result = `rgba(${source[colorName.toLowerCase()]}, ${num / 100})`;
+      const result = `rgba(var(--${colorName.toLowerCase()}), ${num / 100})`;
       designTokensMut[`${key}Tint${num}`] = result;
     });
   });
@@ -235,9 +235,10 @@ const generateNative = (source, name) => {
 
 const [designTokensTrueBlue, paletteTrueBlue] = generate(sourceTrueBlue, 'trueblue');
 const [designTokens2016, palette2016] = generate(source2016, '2016');
-const [designTokens2016Native, palette2016Native] = generateNative(source2016, '2016 native');
 const [designTokens2013, palette2013] = generate(source2013, '2013');
 const [designTokensDecision, paletteDecision] = generate(sourceDecision2016, 'decision');
+
+const [designTokensNative, paletteNative] = generateNative('native');
 
 const toStyleKeys = (source) =>
   Object.entries(source)
@@ -257,8 +258,8 @@ function App() {
           }
           .palette2016native {
             ${toStyleKeys(source2016)}
-            ${toStyleKeys(designTokens2016Native)}
-            ${toStyleKeys(palette2016Native)}
+            ${toStyleKeys(designTokensNative)}
+            ${toStyleKeys(paletteNative)}
           }
           .palette2016 {
             ${toStyleKeys(source2016)}
