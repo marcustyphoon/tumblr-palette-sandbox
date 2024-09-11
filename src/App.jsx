@@ -160,7 +160,7 @@ const generate = (source, name) => {
   return [designTokens, palette];
 };
 
-const generateNative = (name) => {
+const generateNative = (tokensToPalette, name) => {
   const designTokensMut = {};
 
   [
@@ -227,7 +227,7 @@ const generateNative = (name) => {
   );
   console.log(`${name} designTokens`, JSON.stringify(designTokens, null, 2));
 
-  const palette = trueBlueTokensToPalette(designTokens);
+  const palette = tokensToPalette(designTokens);
   console.log(`${name} palette`, JSON.stringify(palette, null, 2));
 
   return [designTokens, palette];
@@ -238,7 +238,10 @@ const [designTokens2016, palette2016] = generate(source2016, '2016');
 const [designTokens2013, palette2013] = generate(source2013, '2013');
 const [designTokensDecision, paletteDecision] = generate(sourceDecision2016, 'decision');
 
-const [designTokensNative, paletteNative] = generateNative('native');
+const [designTokensNative, paletteNative] = generateNative(
+  trueBlueTokensToPalette,
+  'native from trueBlue',
+);
 
 const toStyleKeys = (source) =>
   Object.entries(source)
