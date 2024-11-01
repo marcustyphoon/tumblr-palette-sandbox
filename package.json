@@ -17,22 +17,22 @@
     "colorjs.io": "^0.5.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-error-boundary": "^4.0.13"
+    "react-error-boundary": "^4.1.2"
   },
   "devDependencies": {
-    "@types/react": "^18.3.10",
-    "@types/react-dom": "^18.3.0",
-    "@typescript-eslint/eslint-plugin": "^8.8.0",
-    "@typescript-eslint/parser": "^8.8.0",
-    "@vitejs/plugin-react": "^4.3.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
+    "@vitejs/plugin-react": "^4.3.3",
     "concurrently": "^9.0.1",
     "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-react": "^7.37.1",
+    "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.12",
+    "eslint-plugin-react-refresh": "^0.4.14",
     "prettier": "^3.3.3",
-    "typescript": "^5.6.2",
-    "vite": "^5.4.8"
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10"
   }
 }
