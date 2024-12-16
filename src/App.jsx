@@ -1,17 +1,5 @@
 import Color from 'colorjs.io';
 import { realTrueBluePalette, realTrueBlueTokens, trueBlueTokensToPalette } from './data';
-import { darkModeTokensToPalette } from './data';
-import { lowContrastClassicTokensToPalette } from './data';
-import { cementTokensToPalette } from './data';
-import { cyberneticTokensToPalette } from './data';
-import { canaryTokensToPalette } from './data';
-import { ghostTokensToPalette } from './data';
-import { vampireTokensToPalette } from './data';
-import { pumpkinTokensToPalette } from './data';
-import { nuclearWhiteTokensToPalette } from './data';
-import { gothRaveTokensToPalette } from './data';
-import { prideTokensToPalette } from './data';
-import { realDarkModePalette } from './data';
 
 const camelToSnakeCase = (str) =>
   str.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? '-' : '') + $.toLowerCase());
@@ -31,25 +19,6 @@ const sourceTrueBlue = {
   'deprecated-accent': '0, 184, 255',
   'secondary-accent': '229, 231, 234',
   'follow': '243, 248, 251',
-
-  'gray': '128, 128, 128',
-};
-
-const sourceDarkMode = {
-  'black': '255, 255, 255',
-  'white': '34, 34, 34',
-  'white-on-dark': '255, 255, 255',
-  'navy': '0, 0, 0',
-  'red': '255, 73, 48',
-  'orange': '255, 138, 0',
-  'yellow': '232, 215, 56',
-  'green': '0, 207, 53',
-  'blue': '0, 184, 255',
-  'purple': '124, 92, 255',
-  'pink': '255, 98, 206',
-  'deprecated-accent': '0, 184, 255',
-  'secondary-accent': '57, 57, 57',
-  'follow': '36, 54, 62',
 
   'gray': '128, 128, 128',
 };
@@ -261,19 +230,15 @@ const generateNative = (tokensToPalette, name) => {
   const designTokens = Object.fromEntries(
     Object.keys(realTrueBlueTokens).map((key) => [key, designTokensMut[key] ?? null]),
   );
-  // console.log(`${name} designTokens`, JSON.stringify(designTokens, null, 2));
+  console.log(`${name} designTokens`, JSON.stringify(designTokens, null, 2));
 
-  const paletteTemp = tokensToPalette(designTokens);
-  const palette = Object.fromEntries(
-    Object.keys(trueBlueTokensToPalette({})).map((key) => [key, paletteTemp[key] ?? null]),
-  );
+  const palette = tokensToPalette(designTokens);
   console.log(`${name} palette`, JSON.stringify(palette, null, 2));
 
   return [designTokens, palette];
 };
 
 const [designTokensTrueBlue, paletteTrueBlue] = generate(sourceTrueBlue, 'trueblue');
-
 const [designTokens2016, palette2016] = generate(source2016, '2016');
 const [designTokens2013, palette2013] = generate(source2013, '2013');
 const [designTokensDecision, paletteDecision] = generate(sourceDecision2016, 'decision');
@@ -282,41 +247,6 @@ const [designTokensNative, paletteNative] = generateNative(
   trueBlueTokensToPalette,
   'native from trueBlue',
 );
-
-const [designTokensDarkMode, paletteDarkMode] = generateNative(
-  darkModeTokensToPalette,
-  'native from darkMode',
-);
-
-// const [, darkMode] = generateNative(darkModeTokensToPalette, 'native from darkMode');
-// const [, lowContrastClassic] = generateNative(
-//   lowContrastClassicTokensToPalette,
-//   'native from lowContrastClassic',
-// );
-// const [, cement] = generateNative(cementTokensToPalette, 'native from cement');
-// const [, cybernetic] = generateNative(cyberneticTokensToPalette, 'native from cybernetic');
-// const [, canary] = generateNative(canaryTokensToPalette, 'native from canary');
-// const [, ghost] = generateNative(ghostTokensToPalette, 'native from ghost');
-// const [, vampire] = generateNative(vampireTokensToPalette, 'native from vampire');
-// const [, pumpkin] = generateNative(pumpkinTokensToPalette, 'native from pumpkin');
-// const [, nuclearWhite] = generateNative(nuclearWhiteTokensToPalette, 'native from nuclearWhite');
-// const [, gothRave] = generateNative(gothRaveTokensToPalette, 'native from gothRave');
-// const [, pride] = generateNative(prideTokensToPalette, 'native from pride');
-
-// console.log({
-//   trueBlue: paletteNative,
-//   darkMode,
-//   lowContrastClassic,
-//   cement,
-//   cybernetic,
-//   canary,
-//   ghost,
-//   vampire,
-//   pumpkin,
-//   nuclearWhite,
-//   gothRave,
-//   pride,
-// });
 
 const toStyleKeys = (source) =>
   Object.entries(source)
@@ -333,11 +263,6 @@ function App() {
             ${toStyleKeys(sourceTrueBlue)}
             ${toStyleKeys(designTokensTrueBlue)}
             ${toStyleKeys(paletteTrueBlue)}
-          }
-          .paletteDarkMode {
-            ${toStyleKeys(sourceDarkMode)}
-            ${toStyleKeys(designTokensDarkMode)}
-            ${toStyleKeys(paletteDarkMode)}
           }
           .palette2016native {
             ${toStyleKeys(source2016)}
@@ -360,49 +285,9 @@ function App() {
             ${toStyleKeys(paletteDecision)}
           }
         `}</style>
-
-        {Object.keys(sourceTrueBlue).map((key) => {
-          return (
-            <div key={key} className="row">
-              <div className="swatch" style={{ backgroundColor: `rgb(${sourceTrueBlue[key]})` }}>
-                {key}
-              </div>
-              <div className="swatch" style={{ backgroundColor: `rgb(${sourceTrueBlue[key]})` }}>
-                {key}
-              </div>
-              <div className="swatch" style={{ backgroundColor: `rgb(${sourceTrueBlue[key]})` }}>
-                {key}
-              </div>
-              <div className="swatch" style={{ backgroundColor: `rgb(${source2016[key]})` }}>
-                {key} (n)
-              </div>
-              <div className="swatch" style={{ backgroundColor: `rgb(${source2016[key]})` }}>
-                {key}
-              </div>
-              <div className="swatch" style={{ backgroundColor: `rgb(${source2013[key]})` }}>
-                {key}
-              </div>
-              <div
-                className="swatch"
-                style={{ backgroundColor: `rgb(${sourceDecision2016[key]})` }}
-              >
-                {key}
-              </div>
-            </div>
-          );
-        })}
-
         {Object.keys(realTrueBlueTokens).map((key) => {
           return (
             <div key={key} className="row">
-              <div
-                className="swatch"
-                style={{
-                  backgroundColor: realTrueBlueTokens[key] || `rgb(${sourceTrueBlue[key]})`,
-                }}
-              >
-                {key}
-              </div>
               <div className="swatch" style={{ backgroundColor: realTrueBlueTokens[key] }}>
                 {key}
               </div>
@@ -436,10 +321,7 @@ function App() {
               <div className="swatch" style={{ backgroundColor: realTrueBluePalette[key] }}>
                 {key}
               </div>
-              <div className="swatch" style={{ backgroundColor: realDarkModePalette[key] }}>
-                {key}
-              </div>
-              <div className="swatch paletteDarkMode" style={{ backgroundColor: `var(--${key})` }}>
+              <div className="swatch paletteTrueBlue" style={{ backgroundColor: `var(--${key})` }}>
                 {key}
               </div>
               <div
