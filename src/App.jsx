@@ -1,6 +1,9 @@
 import Color from 'colorjs.io';
 import { realTrueBluePalette, realTrueBlueTokens, trueBlueTokensToPalette } from './data';
 
+const camelToSnakeCase = (str) =>
+  str.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? '-' : '') + $.toLowerCase());
+
 const sourceTrueBlue = {
   'black': '0, 0, 0',
   'white': '255, 255, 255',
@@ -13,7 +16,7 @@ const sourceTrueBlue = {
   'blue': '0, 184, 255',
   'purple': '124, 92, 255',
   'pink': '255, 98, 206',
-  'accent': '0, 184, 255',
+  'deprecated-accent': '0, 184, 255',
   'secondary-accent': '229, 231, 234',
   'follow': '243, 248, 251',
 
@@ -33,7 +36,7 @@ const source2016 = {
   'purple': '167, 125, 194',
   'pink': '116, 128, 137',
   // 'pink': '219, 117, 187',
-  'accent': '82, 158, 204',
+  'deprecated-accent': '82, 158, 204',
   'secondary-accent': '229, 231, 234',
   'follow': '243, 248, 251',
 
@@ -53,7 +56,7 @@ const source2013 = {
   'purple': '176, 138, 200',
   'pink': '130, 141, 149',
   // 'pink': '223, 121, 191',
-  'accent': '99, 167, 209',
+  'deprecated-accent': '99, 167, 209',
   'secondary-accent': '245, 245, 245',
   'follow': '243, 248, 251',
 
@@ -73,7 +76,7 @@ const sourceDecision2016 = {
   'purple': '176, 138, 199',
   'pink': '130, 141, 148',
   // 'pink': '223, 121, 191',
-  'accent': '247, 37, 0',
+  'deprecated-accent': '247, 37, 0',
   'secondary-accent': '245, 245, 245',
   'follow': '243, 248, 251',
 
@@ -97,9 +100,10 @@ const generate = (source, name) => {
     'Black',
     'White',
     'Gray',
+    'DeprecatedAccent',
   ].forEach(async (colorName) => {
     const key = `color${colorName}`;
-    const color = `rgba(${source[colorName.toLowerCase()]}, 1)`;
+    const color = `rgba(${source[camelToSnakeCase(colorName)]}, 1)`;
 
     designTokensMut[key] = color;
 
@@ -120,7 +124,7 @@ const generate = (source, name) => {
     });
 
     [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
-      const result = `rgba(${source[colorName.toLowerCase()]}, ${num / 100})`;
+      const result = `rgba(${source[camelToSnakeCase(colorName)]}, ${num / 100})`;
       designTokensMut[`${key}Tint${num}`] = result;
     });
   });
@@ -175,9 +179,10 @@ const generateNative = (tokensToPalette, name) => {
     'Black',
     'White',
     'Gray',
+    'DeprecatedAccent',
   ].forEach(async (colorName) => {
     const key = `color${colorName}`;
-    const color = `rgba(var(--${colorName.toLowerCase()}), 1)`;
+    const color = `rgba(var(--${camelToSnakeCase(colorName)}), 1)`;
 
     designTokensMut[key] = color;
 
@@ -195,7 +200,7 @@ const generateNative = (tokensToPalette, name) => {
     });
 
     [3, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 85, 90, 95, 100].forEach((num) => {
-      const result = `rgba(var(--${colorName.toLowerCase()}), ${num / 100})`;
+      const result = `rgba(var(--${camelToSnakeCase(colorName)}), ${num / 100})`;
       designTokensMut[`${key}Tint${num}`] = result;
     });
   });
