@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "colorjs.io": "^0.5.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "react-error-boundary": "^5.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.0.7",
     "@types/react-dom": "^18.3.1",
     "@typescript-eslint/eslint-plugin": "^8.19.0",
     "@typescript-eslint/parser": "^8.19.0",
