@@ -9,15 +9,15 @@ updates:
       github-actions:
         patterns:
           - '*'
-  - package-ecosystem: npm
-    directory: /
-    schedule:
-      interval: cron
-      cronjob: 0 17 5 * *
-    groups:
-      npm-dependencies:
-        patterns:
-          - '*'
-        update-types:
-          - minor
-          - patch
+  # - package-ecosystem: npm
+  #   directory: /
+  #   schedule:
+  #     interval: cron
+  #     cronjob: 0 17 5 * *
+  #   groups:
+  #     npm-dependencies:
+  #       patterns:
+  #         - '*'
+  #       update-types:
+  #         - minor
+  #         - patch
