@@ -20,21 +20,19 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - name: Set up PNPM
-        uses: pnpm/action-setup@v6
       - name: Set up Node
         uses: actions/setup-node@v7
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: pnpm
+          cache: npm
       - name: Install dependencies
-        run: pnpm install
+        run: npm install
 
       - name: Lint with ESLint
-        run: pnpm eslintCheck
+        run: npm run eslintCheck
 
       - name: Typecheck with tsc
-        run: pnpm typeCheck
+        run: npm run typeCheck
 
       - name: Format with prettier
-        run: pnpm prettierCheck
+        run: npm run prettierCheck
